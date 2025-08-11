@@ -1,4 +1,7 @@
-# SRTA: Semantic Responsibility Trace Architecture
+[![CI](https://github.com/ubunturbo/srta-ai-accountability/actions/workflows/ci.yml/badge.svg)](https://github.com/ubunturbo/srta-ai-accountability/actions)
+[![codecov](https://codecov.io/gh/ubunturbo/srta-ai-accountability/branch/main/graph/badge.svg)](https://codecov.io/gh/ubunturbo/srta-ai-accountability)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](/LICENSE)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)# SRTA: Semantic Responsibility Trace Architecture
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
