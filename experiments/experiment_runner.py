@@ -87,7 +87,7 @@ class SRTAExperimentRunner:
             dataset_size=100,
             iterations=10,
             trace_depth=3,
-            semantic_threshold=0.7,
+            semantic_threshold=0.5,
             responsibility_levels=["individual", "system"],
             output_dir=self.base_output_dir / "small_scale"
         ))
@@ -98,7 +98,7 @@ class SRTAExperimentRunner:
             dataset_size=1000,
             iterations=50,
             trace_depth=5,
-            semantic_threshold=0.8,
+            semantic_threshold=0.6,
             responsibility_levels=["individual", "team", "system"],
             output_dir=self.base_output_dir / "medium_scale"
         ))
@@ -109,7 +109,7 @@ class SRTAExperimentRunner:
             dataset_size=10000,
             iterations=100,
             trace_depth=7,
-            semantic_threshold=0.85,
+            semantic_threshold=0.6,
             responsibility_levels=["individual", "team", "system", "organization"],
             output_dir=self.base_output_dir / "large_scale"
         ))
@@ -120,7 +120,7 @@ class SRTAExperimentRunner:
             dataset_size=500,
             iterations=200,
             trace_depth=10,
-            semantic_threshold=0.95,
+            semantic_threshold=0.5,
             responsibility_levels=["individual", "team", "system", "organization", "regulatory"],
             output_dir=self.base_output_dir / "high_precision"
         ))

@@ -1,0 +1,42 @@
+{
+  "LIME": {
+    "expected_hrr": 0.123,
+    "actual_hrr": 0.115,
+    "hallucinations": 115,
+    "trials": 1000,
+    "wilson_ci_95": [
+      0.0966831214598715,
+      0.13626359045164926
+    ]
+  },
+  "SHAP": {
+    "expected_hrr": 0.087,
+    "actual_hrr": 0.076,
+    "hallucinations": 76,
+    "trials": 1000,
+    "wilson_ci_95": [
+      0.061149203004722485,
+      0.0940960069965367
+    ]
+  },
+  "IntGrad": {
+    "expected_hrr": 0.094,
+    "actual_hrr": 0.084,
+    "hallucinations": 84,
+    "trials": 1000,
+    "wilson_ci_95": [
+      0.068358553811171,
+      0.10282542581270594
+    ]
+  },
+  "SRTA": {
+    "expected_hrr": 0.0,
+    "actual_hrr": 0.0,
+    "hallucinations": 0,
+    "trials": 1000,
+    "wilson_ci_95": [
+      0,
+      0.003826898586390522
+    ]
+  }
+}

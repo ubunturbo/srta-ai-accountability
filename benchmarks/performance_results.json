@@ -1,0 +1,82 @@
+{
+  "german_credit": {
+    "baseline_accuracy": 0.945,
+    "lime": {
+      "avg_time_ms": 112.60850429534912,
+      "avg_memory_mb": 0.18125
+    },
+    "shap": {
+      "avg_time_ms": 3.0068159103393555,
+      "avg_memory_mb": 0.00234375
+    },
+    "srta": {
+      "avg_time_ms": 598.7439264296768,
+      "avg_memory_mb": 50.2744320255106,
+      "is_placeholder": true
+    }
+  },
+  "uci_adult": {
+    "baseline_accuracy": 0.953,
+    "lime": {
+      "avg_time_ms": 105.95788955688477,
+      "avg_memory_mb": 0.3859375
+    },
+    "shap": {
+      "avg_time_ms": 13.283896446228027,
+      "avg_memory_mb": 0.00078125
+    },
+    "srta": {
+      "avg_time_ms": 652.8894309323313,
+      "avg_memory_mb": 56.36891295206465,
+      "is_placeholder": true
+    }
+  },
+  "boston_housing": {
+    "baseline_accuracy": 0.79,
+    "lime": {
+      "avg_time_ms": 81.61423206329346,
+      "avg_memory_mb": 0.076953125
+    },
+    "shap": {
+      "avg_time_ms": 1.6125202178955078,
+      "avg_memory_mb": 0.0
+    },
+    "srta": {
+      "avg_time_ms": 643.0715313334725,
+      "avg_memory_mb": 53.864734984916275,
+      "is_placeholder": true
+    }
+  },
+  "high_dimensional": {
+    "baseline_accuracy": 0.9275,
+    "lime": {
+      "avg_time_ms": 396.4540958404541,
+      "avg_memory_mb": 0.405078125
+    },
+    "shap": {
+      "avg_time_ms": 66.94746017456055,
+      "avg_memory_mb": 0.0
+    },
+    "srta": {
+      "avg_time_ms": 626.3528998684749,
+      "avg_memory_mb": 52.216000112762075,
+      "is_placeholder": true
+    }
+  },
+  "breast_cancer": {
+    "baseline_accuracy": 0.9649122807017544,
+    "lime": {
+      "avg_time_ms": 125.27813911437988,
+      "avg_memory_mb": 0.15859375
+    },
+    "shap": {
+      "avg_time_ms": 0.5074024200439453,
+      "avg_memory_mb": 0.0
+    },
+    "srta": {
+      "avg_time_ms": 588.0374307187856,
+      "avg_memory_mb": 55.29474357771161,
+      "is_placeholder": true
+    }
+  }
+}

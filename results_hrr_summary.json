@@ -1,0 +1,35 @@
+{
+  "0.0": {
+    "mean_hrr_itemwise": 1.0,
+    "per_trial_rate": 1.0,
+    "wilson_ci_95": [
+      0.9923753814690964,
+      0.9999999999999999
+    ],
+    "n_items": 100,
+    "total_trials": 500,
+    "total_hallucinations": 500
+  },
+  "0.2": {
+    "mean_hrr_itemwise": 1.0,
+    "per_trial_rate": 1.0,
+    "wilson_ci_95": [
+      0.9923753814690964,
+      0.9999999999999999
+    ],
+    "n_items": 100,
+    "total_trials": 500,
+    "total_hallucinations": 500
+  },
+  "0.7": {
+    "mean_hrr_itemwise": 1.0,
+    "per_trial_rate": 1.0,
+    "wilson_ci_95": [
+      0.9923753814690964,
+      0.9999999999999999
+    ],
+    "n_items": 100,
+    "total_trials": 500,
+    "total_hallucinations": 500
+  }
+}

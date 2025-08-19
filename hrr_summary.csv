@@ -1,0 +1,4 @@
+temperature,per_trial_rate,mean_hrr_itemwise,wilson_lo,wilson_hi,n_items,total_trials,total_hallucinations
+0.0,0.0,0.0,0.0,0.007624618530903363,100,500,0
+0.2,0.0,0.0,0.0,0.007624618530903363,100,500,0
+0.7,0.0,0.0,0.0,0.007624618530903363,100,500,0

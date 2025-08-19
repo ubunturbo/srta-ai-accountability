@@ -1,0 +1,38 @@
+{
+  "LIME": {
+    "hallucination_rate": 0.138,
+    "wilson_ci_95": [
+      0.11800423096411534,
+      0.16076644361243145
+    ],
+    "hallucinations": 138,
+    "trials": 1000
+  },
+  "SHAP": {
+    "hallucination_rate": 0.094,
+    "wilson_ci_95": [
+      0.07743389633418887,
+      0.11367354531796026
+    ],
+    "hallucinations": 94,
+    "trials": 1000
+  },
+  "IntGrad": {
+    "hallucination_rate": 0.102,
+    "wilson_ci_95": [
+      0.08473884484006548,
+      0.12230736643470137
+    ],
+    "hallucinations": 102,
+    "trials": 1000
+  },
+  "SRTA": {
+    "hallucination_rate": 0.0,
+    "wilson_ci_95": [
+      0.0,
+      0.003826898586390522
+    ],
+    "hallucinations": 0,
+    "trials": 1000
+  }
+}
