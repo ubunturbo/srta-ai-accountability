@@ -1,24 +1,59 @@
-# SRTA: Structured Reasoning and Transparency Architecture
+# SRTA: AI Explanation Evaluation Framework
 
-AI生成説明の品質を評価するためのPythonフレームワーク
+A research framework for systematic evaluation of AI explanations, combining quality assessment with responsibility tracking.
 
-## 機能
-- 説明文の明確性、完全性、理解しやすさを数値評価
-- 改善提案の自動生成
-- 高速処理（1ms未満）
-- モジュラー設計で拡張可能
+## What SRTA Does
 
-## 使用例
+SRTA evaluates existing AI explanations by measuring both their quality and the level of responsibility information they contain. The system provides statistical analysis of how these two aspects correlate and offers recommendations for improvement.
+
+**Core functionality:**
+- Quality assessment: Measures clarity, completeness, and understandability of explanations
+- Responsibility tracking: Evaluates presence of actor identification, decision traceability, and process transparency
+- Correlation analysis: Analyzes statistical relationships between quality and responsibility metrics
+- Pattern classification: Categorizes evaluation results into improvement patterns
+
+## What SRTA Does Not Do
+
+- Does not generate explanations (evaluates existing ones only)
+- Does not provide legal compliance verification
+- Does not include cryptographic audit trails or blockchain features
+- Does not implement natural language processing or semantic analysis
+
+## Usage Example
+
 ```python
-from src.srta.evaluation.evaluation_layer import EvaluationLayer
+from src.srta.evaluation.unified_evaluation_final import EnhancedUnifiedSRTAEvaluationLayer
 
-evaluator = EvaluationLayer()
-result = evaluator.evaluate_explanation({
-    'explanation_text': 'この画像は猫と判定されました。形状と質感の特徴により87%の信頼度です。'
-})
+# Initialize evaluator
+config = {'weights': {'responsibility': 0.6, 'quality': 0.4}}
+evaluator = EnhancedUnifiedSRTAEvaluationLayer(config)
 
-print(f"品質スコア: {result.metrics.overall:.1%}")
-print(f"品質レベル: {result.quality_level.value}")
-git clone https://github.com/ubunturbo/srta-ai-accountability.git
+# Evaluate an explanation
+context = {
+    'explanation_text': 'The model classified this as a cat based on detected features...',
+    'actor_id': 'classification_model_v1',
+    'responsible_entity': 'ML Team'
+}
+
+result = evaluator.comprehensive_evaluate(context)
+print(f"Quality score: {result.quality_assessment['overall']:.1%}")
+print(f"Responsibility score: {result.responsibility_analysis['overall']:.1%}")
+
+
+Installation and Testing
+bashgit clone https://github.com/ubunturbo/srta-ai-accountability.git
 cd srta-ai-accountability
-python benchmarks/quick_check.py
+
+# Test the system
+python src/srta/evaluation/unified_evaluation_final.py
+Limitations
+
+Scope: Evaluation tool only, not a complete XAI solution
+Scale: Tested on limited scenarios, not validated on large datasets
+Analysis: Statistical correlation, not causal inference
+Integration: Standalone tool, requires manual integration with existing systems
+Validation: Research implementation, not production-ready software
+
+Project Status
+Research implementation - functional but not production-ready
+Last Updated: August 2025
