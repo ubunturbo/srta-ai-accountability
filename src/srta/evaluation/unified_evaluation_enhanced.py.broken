@@ -1,0 +1,243 @@
+
+        # Statistical confidence
+        confidence_factors = [
+            resp_result.metrics.confidence_score,
+            qual_result.confidence_score,
+            correlation_analysis['balance_score'],
+            1 - gap_analysis['responsibility_quality_gap']
+        ]
+        statistical_confidence = sum(confidence_factors) / len(confidence_factors)
+
+        return CorrelationInsights(
+            pattern_classification=pattern,
+            correlation_strength=overall_corr,
+            gap_analysis=gap_analysis,
+            dimensional_balance=dimensional_balance,
+            improvement_priority=improvement_priority,
+            statistical_confidence=statistical_confidence
+        )
+
+    def _calculate_enhanced_unified_score(self, resp_result: ResponsibilityResult,
+                                        qual_result: EvaluationResult,
+                                        insights: CorrelationInsights) -> Tuple[float, Dict[str, float]]:
+        """Calculate enhanced unified score with correlation adjustment"""
+
+        base_unified = (resp_result.metrics.overall * self.weights['responsibility'] + 
+                       qual_result.metrics.overall * self.weights['quality'])
+
+        # Correlation bonus/penalty
+        correlation_adjustment = 0
+        if insights.correlation_strength >= 0.8:
+            correlation_adjustment = 0.05  # Bonus for strong correlation
+        elif insights.correlation_strength < 0.4:
+            correlation_adjustment = -0.03  # Penalty for poor correlation
+
+        # Balance bonus
+        balance_bonus = insights.dimensional_balance['overall_balance'] * 0.02
+
+        # Confidence adjustment
+        confidence_adjustment = (insights.statistical_confidence - 0.5) * 0.04
+
+        unified_score = base_unified + correlation_adjustment + balance_bonus + confidence_adjustment
+        unified_score = max(0.0, min(1.0, unified_score))  # Clamp to [0,1]
+
+        # Weighted dimensions for analysis
+        weighted_dimensions = {
+            'base_score': base_unified,
+            'correlation_adjustment': correlation_adjustment,
+            'balance_bonus': balance_bonus,
+            'confidence_adjustment': confidence_adjustment,
+            'final_score': unified_score
+        }
+
+        return unified_score, weighted_dimensions
+
+    def _generate_enhanced_recommendations(self, resp_result: ResponsibilityResult,
+                                         qual_result: EvaluationResult,
+                                         insights: CorrelationInsights) -> List[str]:
+        """Generate enhanced recommendations based on correlation insights"""
+        recommendations = []
+
+        # Pattern-specific recommendations
+        if insights.pattern_classification == "責任明確・品質不足":
+            recommendations.append("責任追跡の強みを活かして説明品質向上: 明確な責任情報を基により詳細で構造化された説明を作成")
+        elif insights.pattern_classification == "品質良好・責任不明":
+            recommendations.append("説明品質の高さを維持しつつ責任情報強化: 決定プロセスと関与者情報の明示を追加")
+        elif insights.pattern_classification == "非同期改善":
+            recommendations.append("統合性向上: 責任追跡と品質評価の一貫性を高める統一的アプローチを採用")
+
+        # Gap-based recommendations
+        if insights.gap_analysis['responsibility_quality_gap'] > 0.3:
+            recommendations.append("評価軸バランス調整: 責任追跡と品質評価の水準差を縮小する集中的改善")
+
+        # Individual component recommendations
+        if resp_result.metrics.decision_traceability < 0.6:
+            recommendations.append("意思決定追跡強化: 判断根拠と決定プロセスの明示を重点改善")
+        if qual_result.metrics.clarity < 0.6:
+            recommendations.append("明確性向上: 構造化と論理的順序による理解容易性の改善")
+
+        # Confidence-based recommendations
+        if insights.statistical_confidence < 0.6:
+            recommendations.append("評価信頼性向上: より詳細な文脈情報と構造化された説明の提供")
+
+        return recommendations or ["統合評価良好: 現在の水準維持を推奨"]
+
+    def _calculate_unified_confidence(self, resp_result: ResponsibilityResult,
+                                    qual_result: EvaluationResult,
+                                    insights: CorrelationInsights) -> Dict[str, float]:
+        """Calculate comprehensive confidence metrics"""
+        return {
+            'responsibility_confidence': resp_result.metrics.confidence_score,
+            'quality_confidence': qual_result.confidence_score,
+            'correlation_confidence': insights.statistical_confidence,
+            'overall_confidence': (resp_result.metrics.confidence_score + 
+                                 qual_result.confidence_score + 
+                                 insights.statistical_confidence) / 3,
+            'assessment_reliability': min(insights.statistical_confidence, 
+                                        insights.correlation_strength)
+        }
+
+    def _generate_enhanced_overall_assessment(self, unified_score: float,
+                                            insights: CorrelationInsights,
+                                            confidence: Dict[str, float]) -> str:
+        """Generate comprehensive overall assessment"""
+
+        # Score-based level
+        if unified_score >= 0.9:
+            level = "優秀"
+        elif unified_score >= 0.75:
+            level = "良好"
+        elif unified_score >= 0.6:
+            level = "普通"
+        else:
+            level = "要改善"
+
+        # Confidence qualifier
+        if confidence['overall_confidence'] >= 0.8:
+            confidence_qualifier = "高信頼度"
+        elif confidence['overall_confidence'] >= 0.6:
+            confidence_qualifier = "中信頼度"
+        else:
+            confidence_qualifier = "低信頼度"
+
+        return (f"統合評価: {level} (スコア: {unified_score:.1%}, {confidence_qualifier}) "
+                f"- パターン: {insights.pattern_classification}, "
+                f"相関: {insights.correlation_strength:.1%}")
+
+    def _identify_strongest_dimensions(self, resp_scores: Dict[str, float], 
+                                     qual_scores: Dict[str, float]) -> List[str]:
+        """Identify strongest performing dimensions"""
+        all_dims = {**resp_scores, **qual_scores}
+        return sorted(all_dims.keys(), key=lambda k: all_dims[k], reverse=True)[:3]
+
+    def _identify_weakest_dimensions(self, resp_scores: Dict[str, float], 
+                                   qual_scores: Dict[str, float]) -> List[str]:
+        """Identify weakest performing dimensions"""
+        all_dims = {**resp_scores, **qual_scores}
+        return sorted(all_dims.keys(), key=lambda k: all_dims[k])[:3]
+
+    def _calculate_improvement_priority(self, resp_result: ResponsibilityResult,
+                                      qual_result: EvaluationResult,
+                                      gap_analysis: Dict[str, float]) -> List[str]:
+        """Calculate improvement priority based on scores and gaps"""
+        priorities = []
+
+        # Individual dimension scores
+        dimensions = {
+            'decision_traceability': resp_result.metrics.decision_traceability,
+            'data_lineage': resp_result.metrics.data_lineage,
+            'actor_identification': resp_result.metrics.actor_identification,
+            'process_transparency': resp_result.metrics.process_transparency,
+            'clarity': qual_result.metrics.clarity,
+            'completeness': qual_result.metrics.completeness,
+            'understandability': qual_result.metrics.understandability
+        }
+
+        # Sort by score (lowest first = highest priority)
+        sorted_dims = sorted(dimensions.items(), key=lambda x: x[1])
+
+        return [dim for dim, score in sorted_dims if score < 0.7]
+
+def main():
+    """Test the enhanced unified evaluation system"""
+    print("Enhanced Unified SRTA Evaluation System - Test Suite")
+    print("=" * 70)
+
+    config = {
+        'weights': {'responsibility': 0.6, 'quality': 0.4},
+        'transparency_optimal_length': 30
+    }
+
+    unified_evaluator = EnhancedUnifiedSRTAEvaluationLayer(config)
+
+    test_cases = [
+        {
+            'name': 'High Quality, High Responsibility',
+            'explanation_text': """
+The ResNet-50 neural network classified this image as 'cat' with 94.2% confidence.
+First, convolutional layers extracted edge features from input pixels.
+Then, pooling operations identified triangular ear shapes characteristic of felines.
+Finally, the classification head applied softmax to determine the most likely category.
+This decision was based on ImageNet training data containing 1.2M labeled images.
+For example, the detected ear triangulation pattern matches known feline geometries.
+            """.strip(),
+            'actor_id': 'resnet50_v2.1',
+            'actor_type': 'neural_network',
+            'responsible_entity': 'AI Research Lab',
+            'confidence': 0.942
+        },
+        {
+            'name': 'Imbalanced: Good Quality, Poor Responsibility',
+            'explanation_text': """
+The image shows a domestic cat with distinctive features.
+First, the triangular ears indicate feline characteristics.
+Then, the whiskers and facial structure confirm cat identification.
+Finally, the fur texture and body proportions support this classification.
+For example, the ear-to-head ratio is typical of house cats.
+            """.strip(),
+            'confidence': 0.85
+        },
+        {
+            'name': 'Imbalanced: Poor Quality, Good Responsibility',
+            'explanation_text': "Model classified as cat based on training data.",
+            'actor_id': 'classification_system_v1',
+            'actor_type': 'ml_model',
+            'responsible_entity': 'ML Engineering Team',
+            'confidence': 0.78
+        }
+    ]
+
+    for i, test_case in enumerate(test_cases, 1):
+        print(f"\\n{'='*20} Test {i}: {test_case['name']} {'='*20}")
+
+        context = {k: v for k, v in test_case.items() if k != 'name'}
+
+        try:
+            result = unified_evaluator.comprehensive_evaluate(context)
+
+            print(f"Unified Evaluation Results:")
+            print(f"   統合スコア: {result.unified_score:.1%}")
+            print(f"   相関パターン: {result.correlation_insights.pattern_classification}")
+            print(f"   相関強度: {result.correlation_insights.correlation_strength:.1%}")
+            print(f"   統計的信頼度: {result.correlation_insights.statistical_confidence:.1%}")
+            print(f"   処理時間: {result.processing_time:.3f}s")
+
+            print(f"\\n詳細分析:")
+            print(f"   責任追跡: {result.responsibility_analysis['metrics']['overall']:.1%}")
+            print(f"   品質評価: {result.quality_assessment['metrics']['overall']:.1%}")
+            print(f"   評価信頼度: {result.confidence_metrics['overall_confidence']:.1%}")
+
+            print(f"\\n統合推奨事項:")
+            for rec in result.recommendations:
+                print(f"   • {rec}")
+
+            print(f"\\n総合評価: {result.overall_assessment}")
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+    print(f"\\n{'='*70}")
+    print("Enhanced Unified SRTA Evaluation System testing complete!")
+
+if __name__ == "__main__":
+    main()

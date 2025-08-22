@@ -57,3 +57,7 @@ Validation: Research implementation, not production-ready software
 Project Status
 Research implementation - functional but not production-ready
 Last Updated: August 2025
+
+## Public API Contract
+The file `docs/contracts/public_api_contract.yaml` describes the expected public API.
+It is **not an executable test**, but serves as a contract specification for integration testing or schema validation.
