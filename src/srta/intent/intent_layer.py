@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List
 
 
 @dataclass
@@ -9,7 +9,12 @@ class DesignPrinciple:
     name: str
     stakeholder: str
     weight: float  # 0.0 ~ 1.0
-    rationale: str = ""
+    justification: str = ""  # tests expect this field name
+
+    # 互換性: もし外部から rationale を参照したい場合に備えた別名
+    @property
+    def rationale(self) -> str:
+        return self.justification
 
     def to_dict(self) -> Dict:
         return asdict(self)
@@ -17,22 +22,20 @@ class DesignPrinciple:
 
 class IntentLayer:
     """
-    Minimal spec to satisfy unit tests:
-      - principles は {<name>: DesignPrinciple} で保持
-      - add_design_principle(name, stakeholder, weight, rationale) -> bool
-          * weight が [0.0, 1.0] 以外なら False を返し、登録しない
-      - get_applicable_principles(threshold: float = 0.0)
-          * weight > threshold の原則を返す（辞書）
-      - get_stakeholder_responsibilities(stakeholder)
-          * 指定 stakeholder の原則を辞書で返す
-      - get_all_principles()
-          * 全原則（辞書）を返す（既存互換）
-      - validate_principle_consistency()
-          * 合計 weight <= 1.0 かを検証し、結果を辞書で返す
+    Unit tests expectation:
+      - principles: {<name>: DesignPrinciple}
+      - stakeholder_map: {<stakeholder>: [<principle_name>, ...]}
+      - add_design_principle(name, stakeholder, weight, justification) -> bool
+          * weight ∈ [0.0, 1.0] 以外は False で登録しない
+      - get_applicable_principles(threshold=0.0) -> dict[name, DesignPrinciple]
+      - get_stakeholder_responsibilities(stakeholder) -> dict[name, DesignPrinciple]
+      - get_all_principles() -> dict[name, DesignPrinciple]
+      - validate_principle_consistency() -> {"is_consistent": bool, "total_weight": float, "excess": float}
     """
 
     def __init__(self) -> None:
         self.principles: Dict[str, DesignPrinciple] = {}
+        self.stakeholder_map: Dict[str, List[str]] = {}
 
     # -- CRUD-like operations -------------------------------------------------
 
@@ -41,35 +44,54 @@ class IntentLayer:
         name: str,
         stakeholder: str,
         weight: float,
-        rationale: str = "",
+        justification: str = "",
         overwrite: bool = True,
     ) -> bool:
-        """
-        Return:
-            True  : 追加（または上書き）に成功
-            False : weight 不正などで登録しない
-        """
         try:
-            # 厳密な重み検証（テストが期待）
-            if not (0.0 <= float(weight) <= 1.0):
-                return False
+            w = float(weight)
         except Exception:
+            return False
+        if not (0.0 <= w <= 1.0):
             return False
 
         if (not overwrite) and (name in self.principles):
-            return True  # 既存を維持
+            return True  # keep existing
+
+        # 既存の stakeholder 紐付けを掃除（名前で上書きする場合を考慮）
+        if name in self.principles:
+            old = self.principles[name]
+            if old.stakeholder in self.stakeholder_map:
+                self.stakeholder_map[old.stakeholder] = [
+                    n for n in self.stakeholder_map[old.stakeholder] if n != name
+                ]
+                if not self.stakeholder_map[old.stakeholder]:
+                    del self.stakeholder_map[old.stakeholder]
 
         self.principles[name] = DesignPrinciple(
             name=name,
             stakeholder=stakeholder,
-            weight=float(weight),
-            rationale=rationale or "",
+            weight=w,
+            justification=justification or "",
         )
+
+        # stakeholder_map を更新
+        key = stakeholder.strip()
+        self.stakeholder_map.setdefault(key, [])
+        if name not in self.stakeholder_map[key]:
+            self.stakeholder_map[key].append(name)
+
         return True
 
     def remove_design_principle(self, name: str) -> bool:
         if name in self.principles:
+            dp = self.principles[name]
             del self.principles[name]
+            if dp.stakeholder in self.stakeholder_map:
+                self.stakeholder_map[dp.stakeholder] = [
+                    n for n in self.stakeholder_map[dp.stakeholder] if n != name
+                ]
+                if not self.stakeholder_map[dp.stakeholder]:
+                    del self.stakeholder_map[dp.stakeholder]
             return True
         return False
 
@@ -78,24 +100,14 @@ class IntentLayer:
 
     # -- Queries used by tests ------------------------------------------------
 
-    def get_applicable_principles(
-        self, threshold: float = 0.0
-    ) -> Dict[str, DesignPrinciple]:
-        """
-        threshold より大きい weight の原則を返す。
-        """
+    def get_applicable_principles(self, threshold: float = 0.0) -> Dict[str, DesignPrinciple]:
         try:
             thr = float(threshold)
         except Exception:
             thr = 0.0
         return {k: v for k, v in self.principles.items() if v.weight > thr}
 
-    def get_stakeholder_responsibilities(
-        self, stakeholder: str
-    ) -> Dict[str, DesignPrinciple]:
-        """
-        指定 stakeholder に紐づく原則を返す。
-        """
+    def get_stakeholder_responsibilities(self, stakeholder: str) -> Dict[str, DesignPrinciple]:
         key = (stakeholder or "").strip().lower()
         return {
             name: dp
@@ -106,15 +118,12 @@ class IntentLayer:
     # -- Validation -----------------------------------------------------------
 
     def validate_principle_consistency(self) -> Dict[str, float | bool]:
-        """
-        合計 weight <= 1.0 かを検証。
-        戻り値:
-          {
-            "ok": bool,
-            "total_weight": float,
-            "excess": float  # 0 以上。超過がなければ 0.0
-          }
-        """
         total = sum(dp.weight for dp in self.principles.values())
         excess = max(0.0, total - 1.0)
-        return {"ok": excess == 0.0, "total_weight": total, "excess": excess}
+        # tests expect 'is_consistent'; 互換のため 'ok' も返す
+        return {
+            "is_consistent": excess == 0.0,
+            "ok": excess == 0.0,
+            "total_weight": total,
+            "excess": excess,
+        }
