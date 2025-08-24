@@ -23,3 +23,13 @@ result = core.evaluate(
     context={"amount": 1000}
 )
 print(result['decision'])  # ALLOW, REVIEW, or BLOCK
+
+## Known Issues
+
+- Demo script has Unicode errors on Windows
+- Signal detection thresholds need tuning
+- No production error handling
+
+## Status
+
+This is a proof-of-concept implementation for research purposes.
