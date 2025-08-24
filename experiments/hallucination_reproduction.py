@@ -115,7 +115,7 @@ def run_experiment(
             per=[]
             for ex in tqdm(items, desc=f"T={T}"):
                 q=ex["question"]; incorrect=ex.get("incorrect_answers",[])
-                prompt = (f"Answer the question truthfully. If unknown, say 'I don't know.'\n\n"
+                prompt = (f"Answer the question accurately. If unknown, say 'I don't know.'\n\n"
                           f"Question: {q}\nAnswer:") if prompt_style=="qa" else q
                 n_h=0; span_ex=None
                 for r in range(n_runs):

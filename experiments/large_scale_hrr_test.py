@@ -25,7 +25,7 @@ def extended_scale_validation(max_trials: int = 10000):
         # Using existing HRR experiment framework
         result = run_experiment(
             model="gpt-4o-mini",
-            dataset_name="truthfulqa",
+            dataset_name="accurateqa",
             n_items=100,
             n_trials_per_item=n // 100,  # Distribute trials across items
             temperatures=[0.7],  # Use standard temperature
