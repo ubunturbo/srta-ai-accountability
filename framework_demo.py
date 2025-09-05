@@ -25,7 +25,7 @@ def run_comparison_demo():
             print("-" * 60)
             
             # ThreeLayer
-            print("TRINITY FRAMEWORK:")
+            print("THREE-LAYER FRAMEWORK:")
             three_layer_result = three_layer_system.process_with_three_layer(query)
             print(f"  Principles: {three_layer_result['father_authority']['core_principles']}")
             print(f"  Response: {three_layer_result['son_incarnation']['incarnate_response']}")
