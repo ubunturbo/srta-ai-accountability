@@ -1018,7 +1018,7 @@ class EvaluationLayer:
     Layer 3: Accountability Assessment with integrated references.
     
     Generates comprehensive accountability reports through dual-source evaluation,
-    combining intent analysis and process analysis via filioque evaluation.
+    combining intent analysis and process analysis via dual-source evaluation.
     """
     
     def __init__(self, intent_layer: IntentLayer, generation_layer: GenerationLayer):
@@ -1037,7 +1037,7 @@ class EvaluationLayer:
         """
         Generate accountability assessment through dual-source analysis.
         
-        Revolutionary capability implementing filioque evaluation that combines
+        Revolutionary capability implementing dual-source evaluation that combines
         intent analysis and process analysis for complete accountability.
         """
         start_time = time.time()
@@ -1047,8 +1047,8 @@ class EvaluationLayer:
         intent_analysis = self.intent_ref.analyze_compliance(input_data, output_decision)
         process_analysis = self.generation_ref.trace_computation(input_data)
         
-        # Generate filioque evaluation (dual-source synthesis)
-        evaluation_result = self.filioque_evaluation(intent_analysis, process_analysis)
+        # Generate dual-source evaluation (dual-source synthesis)
+        evaluation_result = self.dual_source_evaluation(intent_analysis, process_analysis)
         
         # Calculate regulatory compliance scores
         compliance_scores = self._calculate_regulatory_scores(
@@ -1087,12 +1087,12 @@ class EvaluationLayer:
         
         return report
     
-    def filioque_evaluation(self, intent_analysis: Dict[str, Any], 
+    def dual_source_evaluation(self, intent_analysis: Dict[str, Any], 
                           process_analysis: Dict[str, Any]) -> Dict[str, str]:
         """
         Generate evaluation through dual-source interaction.
         
-        Revolutionary filioque evaluation implementing systematic integration
+        Revolutionary dual-source evaluation implementing systematic integration
         of design rationale and operational processing for complete accountability.
         """
         
