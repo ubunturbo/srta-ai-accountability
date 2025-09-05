@@ -1,0 +1,27 @@
+{
+  "actors": [
+    "Safety",
+    "Quality",
+    "Operations"
+  ],
+  "policies": [
+    {
+      "id": "SAFETY_TEST",
+      "owner": "Safety",
+      "signal": "toxicity",
+      "operator": "<",
+      "threshold": 0.3,
+      "severity": "block",
+      "weight": 2.0
+    },
+    {
+      "id": "QUALITY_TEST",
+      "owner": "Quality",
+      "signal": "confidence",
+      "operator": ">",
+      "threshold": 0.6,
+      "severity": "warn",
+      "weight": 1.0
+    }
+  ]
+}
