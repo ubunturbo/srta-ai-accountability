@@ -1,6 +1,6 @@
 # SRTA: AI Explanation Evaluation Framework
 
-A research framework for systematic evaluation of AI explanations, combining quality assessment with responsibility tracking.
+⚠️ **Research Implementation** - A research framework for systematic evaluation of AI explanations, combining quality assessment with responsibility tracking.
 
 ## What SRTA Does
 
@@ -47,12 +47,13 @@ cd srta-ai-accountability
 # Test the system
 python src/srta/evaluation/unified_evaluation_final.py
 Limitations
+- **Platform**: Windows compatibility may vary (tested primarily on Linux/macOS)
 
-Scope: Evaluation tool only, not a complete XAI solution
-Scale: Tested on limited scenarios, not validated on large datasets
-Analysis: Statistical correlation, not causal inference
-Integration: Standalone tool, requires manual integration with existing systems
-Validation: Research implementation, not production-ready software
+- **Scope**: Evaluation tool only, not a complete XAI solution
+- **Scale**: Tested on limited scenarios, not validated on large datasets
+- **Analysis**: Statistical correlation, not causal inference
+- **Integration**: Standalone tool, requires manual integration with existing systems
+- **Validation**: Research implementation, not production-ready software
 
 Project Status
 Research implementation - functional but not production-ready
