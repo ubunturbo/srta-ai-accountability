@@ -107,7 +107,7 @@ class GenerationLayer:
         Generate human-readable explanation from analysis results.
         分析結果から人間が読める説明を生成。
 
-        Core method implementing Trinity-inspired explanation synthesis,
+        Core method implementing Three-layer explanation synthesis,
         combining intent analysis with operational processing for
         complete accountability.
         

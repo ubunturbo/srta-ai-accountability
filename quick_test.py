@@ -6,11 +6,11 @@ sys.path.insert(0, 'src')
 
 def test_frameworks():
     try:
-        print("Testing Trinity framework...")
-        from trinity.trinity_srta import create_medical_ai_trinity
-        trinity_ai = create_medical_ai_trinity()
-        trinity_result = trinity_ai.process_with_trinity("Should we proceed with treatment?")
-        print(f"  Trinity coherence: {trinity_result['spirit_unity']['divine_coherence_score']}")
+        print("Testing ThreeLayer framework...")
+        from three_layer.three_layer_srta import create_medical_ai_three_layer
+        three_layer_ai = create_medical_ai_three_layer()
+        three_layer_result = three_layer_ai.process_with_three_layer("Should we proceed with treatment?")
+        print(f"  ThreeLayer coherence: {three_layer_result['system_unity']['system_coherence_score']}")
         
         print("Testing TMA framework...")
         from tma.tma_srta import create_medical_ai_tma

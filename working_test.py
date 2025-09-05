@@ -12,17 +12,17 @@ print(f"Testing from directory: {current_dir}")
 print(f"Source directory: {src_dir}")
 
 try:
-    from trinity.trinity_srta import create_medical_ai_trinity
-    print("✓ Trinity import successful")
+    from three_layer.three_layer_srta import create_medical_ai_three_layer
+    print("✓ ThreeLayer import successful")
     
     from tma.tma_srta import create_medical_ai_tma
     print("✓ TMA import successful")
     
-    # Test Trinity
-    print("\nTesting Trinity framework...")
-    trinity_ai = create_medical_ai_trinity()
-    trinity_result = trinity_ai.process_with_trinity("Should we proceed with treatment?")
-    print(f"Trinity coherence: {trinity_result['spirit_unity']['divine_coherence_score']}")
+    # Test ThreeLayer
+    print("\nTesting ThreeLayer framework...")
+    three_layer_ai = create_medical_ai_three_layer()
+    three_layer_result = three_layer_ai.process_with_three_layer("Should we proceed with treatment?")
+    print(f"ThreeLayer coherence: {three_layer_result['system_unity']['system_coherence_score']}")
     
     # Test TMA
     print("Testing TMA framework...")

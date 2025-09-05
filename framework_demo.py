@@ -4,14 +4,14 @@ sys.path.insert(0, 'src')
 
 def run_comparison_demo():
     try:
-        from trinity.trinity_srta import create_medical_ai_trinity
+        from three_layer.three_layer_srta import create_medical_ai_three_layer
         from tma.tma_srta import create_medical_ai_tma
         
         print("=" * 60)
         print("DUAL FRAMEWORK AI ARCHITECTURE DEMONSTRATION")
         print("=" * 60)
         
-        trinity_system = create_medical_ai_trinity()
+        three_layer_system = create_medical_ai_three_layer()
         tma_system = create_medical_ai_tma()
         
         queries = [
@@ -24,12 +24,12 @@ def run_comparison_demo():
             print(f"\nQUERY {i}: {query}")
             print("-" * 60)
             
-            # Trinity
+            # ThreeLayer
             print("TRINITY FRAMEWORK:")
-            trinity_result = trinity_system.process_with_trinity(query)
-            print(f"  Principles: {trinity_result['father_authority']['divine_principles']}")
-            print(f"  Response: {trinity_result['son_incarnation']['incarnate_response']}")
-            print(f"  Coherence: {trinity_result['spirit_unity']['divine_coherence_score']}")
+            three_layer_result = three_layer_system.process_with_three_layer(query)
+            print(f"  Principles: {three_layer_result['father_authority']['core_principles']}")
+            print(f"  Response: {three_layer_result['son_incarnation']['incarnate_response']}")
+            print(f"  Coherence: {three_layer_result['system_unity']['system_coherence_score']}")
             
             # TMA
             print("\nTMA FRAMEWORK:")
@@ -39,9 +39,9 @@ def run_comparison_demo():
             print(f"  Coherence: {tma_result['integration_module']['coherence_score']}")
             
             # Compare
-            trinity_coherence = trinity_result['spirit_unity']['divine_coherence_score']
+            three_layer_coherence = three_layer_result['system_unity']['system_coherence_score']
             tma_coherence = tma_result['integration_module']['coherence_score']
-            difference = abs(trinity_coherence - tma_coherence)
+            difference = abs(three_layer_coherence - tma_coherence)
             
             print(f"\nEQUIVALENCE: Difference = {difference:.3f}")
             print(f"Status: {'✓ EQUIVALENT' if difference < 0.1 else '⚠ REVIEW NEEDED'}")

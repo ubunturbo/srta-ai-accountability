@@ -13,25 +13,25 @@ class TestBasicFunctionality(unittest.TestCase):
     def test_imports(self):
         """Test that frameworks can be imported"""
         try:
-            from trinity.trinity_srta import TrinitarianSRTAArchitecture, create_medical_ai_trinity
+            from three_layer.three_layer_srta import ThreeLayerSRTAArchitecture, create_medical_ai_three_layer
             from tma.tma_srta import TMAArchitecture, create_medical_ai_tma
             self.assertTrue(True, "Imports successful")
         except ImportError as e:
             self.fail(f"Import failed: {e}")
     
-    def test_trinity_basic(self):
-        """Test Trinity framework basic functionality"""
+    def test_three_layer_basic(self):
+        """Test ThreeLayer framework basic functionality"""
         try:
-            from trinity.trinity_srta import create_medical_ai_trinity
-            trinity_ai = create_medical_ai_trinity()
-            result = trinity_ai.process_with_trinity("Test query")
+            from three_layer.three_layer_srta import create_medical_ai_three_layer
+            three_layer_ai = create_medical_ai_three_layer()
+            result = three_layer_ai.process_with_three_layer("Test query")
             
             self.assertIn("father_authority", result)
             self.assertIn("son_incarnation", result)
             self.assertIn("spirit_unity", result)
             
         except Exception as e:
-            self.fail(f"Trinity test failed: {e}")
+            self.fail(f"ThreeLayer test failed: {e}")
     
     def test_tma_basic(self):
         """Test TMA framework basic functionality"""
