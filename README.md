@@ -1,6 +1,22 @@
 # SRTA: AI Explanation Evaluation Framework
 
-⚠️ **Research Implementation** - A research framework for systematic evaluation of AI explanations, combining quality assessment with responsibility tracking.
+⚠️ **Proof-of-Concept Architecture** - A research framework for systematic evaluation of AI explanations, combining quality assessment with responsibility tracking.
+
+## Contribution Type
+
+This repository presents a novel architectural approach to AI explanation accountability, demonstrating how responsibility tracking can be integrated with quality assessment. The implementation serves as a proof-of-concept for the theoretical framework rather than a validated production system.
+
+## Architectural Innovation
+
+- Integration of stakeholder attribution with explanation evaluation
+- Multi-layer principle tracking (Authority, Interface, Integration modules)  
+- Structured accountability assessment alongside traditional quality metrics
+- Proof-of-concept implementation demonstrating architectural feasibility
+
+## Research Positioning
+
+This work contributes to the theoretical understanding of responsibility-aware AI systems rather than claiming empirical validation. The focus is on architectural patterns and implementation feasibility, providing a foundation for future validation studies by researchers with appropriate resources.
+
 
 ## What SRTA Does
 
@@ -22,7 +38,7 @@ SRTA evaluates existing AI explanations by measuring both their quality and the 
 ## Usage Example
 
 ```python
-from src.srta.evaluation.unified_evaluation_final import EnhancedUnifiedSRTAEvaluationLayer
+from src.srta.evaluation.evaluation_layer import EvaluationLayer
 
 # Initialize evaluator
 config = {'weights': {'responsibility': 0.6, 'quality': 0.4}}
