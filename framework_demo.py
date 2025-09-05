@@ -27,7 +27,7 @@ def run_comparison_demo():
             # ThreeLayer
             print("THREE-LAYER FRAMEWORK:")
             three_layer_result = three_layer_system.process_with_three_layer(query)
-            print(f"  Principles: {three_layer_result['father_authority']['core_principles']}")
+            print(f"  Principles: {three_layer_result['authority_module']['core_principles']}")
             print(f"  Response: {three_layer_result['son_incarnation']['incarnate_response']}")
             print(f"  Coherence: {three_layer_result['system_unity']['system_coherence_score']}")
             
