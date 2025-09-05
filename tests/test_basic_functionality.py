@@ -26,9 +26,9 @@ class TestBasicFunctionality(unittest.TestCase):
             three_layer_ai = create_medical_ai_three_layer()
             result = three_layer_ai.process_with_three_layer("Test query")
             
-            self.assertIn("father_authority", result)
-            self.assertIn("son_incarnation", result)
-            self.assertIn("spirit_unity", result)
+            self.assertIn("authority_module", result)
+            self.assertIn("mediator_module", result)
+            self.assertIn("auditor_module", result)
             
         except Exception as e:
             self.fail(f"ThreeLayer test failed: {e}")
