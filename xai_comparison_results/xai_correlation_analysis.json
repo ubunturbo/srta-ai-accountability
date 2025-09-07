@@ -1,0 +1,25 @@
+{
+  "LIME": {
+    "spearman_r": NaN,
+    "spearman_p": NaN,
+    "pearson_r": NaN,
+    "pearson_p": NaN,
+    "status": "constant_values"
+  },
+  "SHAP": {
+    "spearman_r": NaN,
+    "spearman_p": NaN,
+    "pearson_r": NaN,
+    "pearson_p": NaN,
+    "status": "constant_values"
+  },
+  "SRTA": {
+    "spearman_r": -0.39622373277459977,
+    "spearman_p": 0.004393127588953221,
+    "pearson_r": -0.6406563522212254,
+    "pearson_p": 5.412257516346152e-07,
+    "mean_score": 34.42287999999999,
+    "std_score": 0.07100215208006147,
+    "status": "computed"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "overall": {
+    "spearman_r": -0.17161371829877337,
+    "spearman_p": 0.015106068432143705,
+    "pearson_r": -0.13151374835681992,
+    "pearson_p": 0.06341106085751465,
+    "sample_size": 200
+  },
+  "clarity_score": {
+    "spearman_r": -0.1725398211145974,
+    "spearman_p": 0.014560160551984391,
+    "pearson_r": -0.10217868361844046,
+    "pearson_p": 0.1499414574470476
+  },
+  "evidence_score": {
+    "spearman_r": -0.1751491754587639,
+    "spearman_p": 0.013113804975159186,
+    "pearson_r": -0.13427183537629525,
+    "pearson_p": 0.05801547792270431
+  },
+  "attribution_score": {
+    "spearman_r": NaN,
+    "spearman_p": NaN,
+    "pearson_r": NaN,
+    "pearson_p": NaN
+  },
+  "auditability_score": {
+    "spearman_r": -0.1751491754587639,
+    "spearman_p": 0.013113804975159186,
+    "pearson_r": -0.13427183537629528,
+    "pearson_p": 0.05801547792270431
+  },
+  "actionability_score": {
+    "spearman_r": 0.09600099220738957,
+    "spearman_p": 0.17628748668842384,
+    "pearson_r": 0.037654426310790544,
+    "pearson_p": 0.5965529870920204
+  },
+  "CoLA_specific": {
+    "spearman_r": -0.04139121177462647,
+    "spearman_p": 0.6826251428153787,
+    "sample_size": 100
+  },
+  "XNLI_specific": {
+    "spearman_r": 0.013410175734403458,
+    "spearman_p": 0.8946507477432546,
+    "sample_size": 100
+  }
+}

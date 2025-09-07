@@ -1,0 +1,5 @@
+sample_id,task_type,principle_overall,expression_overall,audit_overall,consensus_overall,consensus_systematic,consensus_relevant,consensus_transparent,consensus_actionable,timestamp
+sample_001,CoLA,6.88,6.88,6.38,6.73,6.95,6.65,5.48,7.85,2025-09-07T12:18:16.653499
+sample_002,XNLI,6.88,6.88,6.38,6.73,6.95,6.65,5.48,7.85,2025-09-07T12:18:16.655498
+sample_003,sentiment,7.04,7.04,6.54,6.89,5.55,7.65,7.2,7.15,2025-09-07T12:18:16.657497
+sample_004,CoLA,6.5,6.38,6.0,6.31,3.65,5.75,9.64,6.2,2025-09-07T12:18:16.659501
